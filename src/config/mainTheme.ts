@@ -51,6 +51,7 @@ const mainTheme = createTheme({
           flexGrow: 1,
           position: 'relative',
           overflow: 'hidden',
+          paddingTop: '65px',
           paddingBottom: '20px',
         },
       },

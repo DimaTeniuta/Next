@@ -6,7 +6,8 @@
     "start": "next dev",
     "build": "next build",
     "preview": "next start",
-    "lint": "eslint .",
+    "lint": "next lint",
+    "eslint": "eslint .",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -43,7 +44,7 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "npm run lint"
+      "npm run eslint"
     ]
   }
 }
