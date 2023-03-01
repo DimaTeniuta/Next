@@ -12,7 +12,7 @@ const Header = () => {
               <Button component={Link} href="/" sx={Styled.navButtonStyles}>
                 Main
               </Button>
-              <Button component={Link} href="/about" sx={Styled.navButtonStyles}>
+              <Button component={Link} href="/characters" sx={Styled.navButtonStyles}>
                 About
               </Button>
             </Styled.WrapperBtn>
