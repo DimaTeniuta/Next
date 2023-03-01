@@ -13,7 +13,7 @@ const Header = () => {
                 Main
               </Button>
               <Button component={Link} href="/characters" sx={Styled.navButtonStyles}>
-                About
+                Characters
               </Button>
             </Styled.WrapperBtn>
           </Styled.Toolbar>
