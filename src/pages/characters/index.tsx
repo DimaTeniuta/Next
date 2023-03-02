@@ -1,45 +1,35 @@
 import { Box, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import * as Styled from './characters.styles';
 
 const Characters = ({ data }: { data: ICharactersResult }) => {
-  const [characters, setCharacters] = useState(data);
-  const [page, setPage] = useState(1);
-  console.log(characters);
-
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
-      .then((res) => res.json())
-      .then((data) => console.log(1111, data));
-  }, []);
+  const router = useRouter();
+  const [page, setPage] = useState(parseInt(router?.query?.page as string) || 1);
 
   const goToPrevPage = () => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}?page=${page - 1}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data);
-        setPage((prev) => prev - 1);
-      })
-      .catch((err) => console.error(err.massage));
+    setPage((prev) => prev - 1);
+    router.push({
+      pathname: router.pathname,
+      query: { page: page - 1 },
+    });
   };
 
   const goToNextPage = () => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}?page=${page + 1}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data);
-        setPage((prev) => prev + 1);
-      })
-      .catch((err) => console.error(err.massage));
+    setPage((prev) => prev + 1);
+    router.push({
+      pathname: router.pathname,
+      query: { page: page + 1 },
+    });
   };
 
   return (
     <Styled.Container>
       <Styled.Wrapper>
-        {characters.results.map((character) => (
+        {data.results.map((character) => (
           <Box
             key={character.id}
             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
@@ -56,16 +46,21 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
       <Pagination
         onClickNext={goToNextPage}
         onClickPrev={goToPrevPage}
-        isNext={!characters.info.next}
-        isPrev={!characters.info.prev}
+        isNext={!data.info.next}
+        isPrev={!data.info.prev}
         page={page}
       />
     </Styled.Container>
   );
 };
 
-export async function getStaticProps() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+export async function getServerSideProps(context: { query: { page: string } }) {
+  let page = 1;
+  if (context.query.page) {
+    page = parseInt(context.query.page);
+  }
+
+  const res = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`);
   const data = await res.json();
   return {
     props: { data },
