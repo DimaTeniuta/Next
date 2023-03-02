@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
@@ -34,7 +35,16 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
             key={character.id}
             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
           >
-            <Styled.Image sx={{ backgroundImage: `url(${character.image})` }} />
+            <Image
+              src={character.image}
+              width={200}
+              height={200}
+              alt={'Image'}
+              placeholder="blur"
+              blurDataURL={
+                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
+              }
+            />
 
             <Typography component={Link} href={`/characters/${character.id}`}>
               {character.name}

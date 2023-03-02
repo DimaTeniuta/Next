@@ -5,14 +5,4 @@ export const Container = styled('div')(() => ({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: '20px',
-}));
-
-export const Wrapper = styled('div')(() => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexWrap: 'wrap',
-  gap: '20px',
-  padding: '20px',
 }));
