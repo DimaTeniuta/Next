@@ -1,7 +1,13 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "prettier",
+    "react-hooks",
+    "mobx"
+  ],
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
@@ -9,10 +15,12 @@
     "plugin:import/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
+    "plugin:mobx/recommended"
   ],
 
   "rules": {
+    "mobx/missing-observer": "off",
     "arrow-parens": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",

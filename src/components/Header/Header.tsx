@@ -15,6 +15,9 @@ const Header = () => {
               <Button component={Link} href="/characters" sx={Styled.navButtonStyles}>
                 Characters
               </Button>
+              <Button component={Link} href="/mobx" sx={Styled.navButtonStyles}>
+                MobX
+              </Button>
             </Styled.WrapperBtn>
           </Styled.Toolbar>
         </Container>

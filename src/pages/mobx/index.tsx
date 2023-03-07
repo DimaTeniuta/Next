@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { ICharactersResult } from '@/interfaces/character';
+import { ICharacter, ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
-import * as Styled from './characters.styles';
+import characterStore from '@/store/character';
+import * as Styled from './mobx.styles';
 
-const Characters = ({ data }: { data: ICharactersResult }) => {
+const Mobx = ({ data }: { data: ICharactersResult }) => {
   const router = useRouter();
   const [page, setPage] = useState(parseInt(router?.query?.page as string) || 1);
 
@@ -27,9 +27,16 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
     });
   };
 
+  const handleClick = (character: ICharacter) => {
+    return () => {
+      characterStore.setCharacter(character);
+      router.push(`/mobx/${character.id}`);
+    };
+  };
+
   return (
     <Styled.Container>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>SSR</Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>With MobX</Box>
       <Styled.Wrapper>
         {data.results.map((character) => (
           <Box
@@ -47,7 +54,7 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
               }
             />
 
-            <Typography component={Link} href={`/characters/${character.id}`}>
+            <Typography onClick={handleClick(character)} sx={{ ':hover': { cursor: 'pointer' } }}>
               {character.name}
             </Typography>
           </Box>
@@ -78,4 +85,4 @@ export async function getServerSideProps(context: { query: { page: string } }) {
   };
 }
 
-export default Characters;
+export default Mobx;
