@@ -71,7 +71,7 @@ export async function getServerSideProps(context: { query: { page: string } }) {
     page = parseInt(context.query.page);
   }
 
-  const res = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/?page=${page}`);
   const data = await res.json();
   return {
     props: { data },

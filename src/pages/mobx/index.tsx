@@ -1,29 +1,36 @@
 import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 import { ICharacter, ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import characterStore from '@/store/character';
+import pageStore from '@/store/page';
 import * as Styled from './mobx.styles';
 
-const Mobx = ({ data }: { data: ICharactersResult }) => {
+const Mobx = observer(({ data }: { data: ICharactersResult }) => {
   const router = useRouter();
-  const [page, setPage] = useState(parseInt(router?.query?.page as string) || 1);
+
+  useEffect(() => {
+    if (parseInt(router?.query?.page as string) !== pageStore.page) {
+      pageStore.setPage(parseInt(router?.query?.page as string));
+    }
+  }, [router?.query?.page]);
 
   const goToPrevPage = () => {
-    setPage((prev) => prev - 1);
+    pageStore.decreasePage();
     router.push({
       pathname: router.pathname,
-      query: { page: page - 1 },
+      query: { page: pageStore.page },
     });
   };
 
   const goToNextPage = () => {
-    setPage((prev) => prev + 1);
+    pageStore.increasePage();
     router.push({
       pathname: router.pathname,
-      query: { page: page + 1 },
+      query: { page: pageStore.page },
     });
   };
 
@@ -66,11 +73,11 @@ const Mobx = ({ data }: { data: ICharactersResult }) => {
         onClickPrev={goToPrevPage}
         isNext={!data.info.next}
         isPrev={!data.info.prev}
-        page={page}
+        page={pageStore.page}
       />
     </Styled.Container>
   );
-};
+});
 
 export async function getServerSideProps(context: { query: { page: string } }) {
   let page = 1;
@@ -78,7 +85,7 @@ export async function getServerSideProps(context: { query: { page: string } }) {
     page = parseInt(context.query.page);
   }
 
-  const res = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/?page=${page}`);
   const data = await res.json();
   return {
     props: { data },
