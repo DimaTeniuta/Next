@@ -1,8 +1,9 @@
-import { Box, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { Box, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import { Search } from '@mui/icons-material';
 import { ICharacter, ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import characterStore from '@/store/character';
@@ -12,9 +13,11 @@ import * as Styled from './mobx.styles';
 const Mobx = observer(({ data }: { data: ICharactersResult }) => {
   const router = useRouter();
 
+  const [searchValue, setSearchValue] = useState('');
+
   useEffect(() => {
     if (parseInt(router?.query?.page as string) !== pageStore.page) {
-      pageStore.setPage(parseInt(router?.query?.page as string));
+      pageStore.setPage(parseInt(router?.query?.page as string) || 1);
     }
   }, [router?.query?.page]);
 
@@ -41,31 +44,48 @@ const Mobx = observer(({ data }: { data: ICharactersResult }) => {
     };
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event?.target.value);
+  };
+
   return (
     <Styled.Container>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>With MobX</Box>
-      <Styled.Wrapper>
-        {data.results.map((character) => (
-          <Box
-            key={character.id}
-            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
-          >
-            <Image
-              src={character.image}
-              width={200}
-              height={200}
-              alt={'Image'}
-              placeholder="blur"
-              blurDataURL={
-                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-              }
-            />
 
-            <Typography onClick={handleClick(character)} sx={{ ':hover': { cursor: 'pointer' } }}>
-              {character.name}
-            </Typography>
-          </Box>
-        ))}
+      <TextField
+        color="secondary"
+        placeholder={'Search...'}
+        InputProps={{ startAdornment: <Search /> }}
+        size="small"
+        inputProps={{ sx: { px: '10px' } }}
+        onChange={handleSearch}
+        value={searchValue}
+      />
+
+      <Styled.Wrapper>
+        {data.results
+          .filter((character) => character.name.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((character) => (
+            <Box
+              key={character.id}
+              sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
+            >
+              <Image
+                src={character.image}
+                width={200}
+                height={200}
+                alt={'Image'}
+                placeholder="blur"
+                blurDataURL={
+                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
+                }
+              />
+
+              <Typography onClick={handleClick(character)} sx={{ ':hover': { cursor: 'pointer' } }}>
+                {character.name}
+              </Typography>
+            </Box>
+          ))}
       </Styled.Wrapper>
 
       <Pagination
