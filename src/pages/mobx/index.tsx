@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from '@mui/material';
+import { Box, Paper, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -66,7 +66,8 @@ const Mobx = observer(({ data }: { data: ICharactersResult }) => {
         {data.results
           .filter((character) => character.name.toLowerCase().includes(searchValue.toLowerCase()))
           .map((character) => (
-            <Box
+            <Paper
+              elevation={3}
               key={character.id}
               sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
             >
@@ -84,7 +85,7 @@ const Mobx = observer(({ data }: { data: ICharactersResult }) => {
               <Typography onClick={handleClick(character)} sx={{ ':hover': { cursor: 'pointer' } }}>
                 {character.name}
               </Typography>
-            </Box>
+            </Paper>
           ))}
       </Styled.Wrapper>
 

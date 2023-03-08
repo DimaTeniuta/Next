@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Paper from '@mui/material/Paper';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import * as Styled from './characters.styles';
@@ -32,7 +33,8 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>SSR</Box>
       <Styled.Wrapper>
         {data.results.map((character) => (
-          <Box
+          <Paper
+            elevation={3}
             key={character.id}
             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
           >
@@ -50,7 +52,7 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
             <Typography component={Link} href={`/characters/${character.id}`}>
               {character.name}
             </Typography>
-          </Box>
+          </Paper>
         ))}
       </Styled.Wrapper>
 

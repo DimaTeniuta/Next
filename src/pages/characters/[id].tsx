@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import Image from 'next/image';
+import Typography from '@mui/material/Typography';
 import { ICharacter } from '@/interfaces/character';
 import * as Styled from './characters.id.styles';
 
@@ -13,17 +14,20 @@ const Character = ({ data }: { data: ICharacter }) => {
 
   return (
     <Styled.Container>
-      <Image
-        src={data.image}
-        width={200}
-        height={200}
-        alt={'Image'}
-        placeholder="blur"
-        blurDataURL={
-          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-        }
-      />
-      <div>{data.name}</div>
+      <Styled.WrapperImage>
+        <Image
+          src={data.image}
+          width={400}
+          height={400}
+          alt={'Image'}
+          placeholder="blur"
+          blurDataURL={
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
+          }
+        />
+        <Typography>{data.name}</Typography>
+      </Styled.WrapperImage>
+
       <Button variant="contained" onClick={handleGoBack}>
         Go Back
       </Button>
