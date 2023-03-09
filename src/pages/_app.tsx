@@ -1,7 +1,10 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
+import { Spinner } from '@/components/Spinner';
 import mainTheme from '../config/mainTheme';
 import createEmotionCache from '../config/createEmotionCache';
 
@@ -16,11 +19,33 @@ export default function App({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: IAppProps) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handleRouteStart = () => {
+      setLoading(true);
+    };
+
+    const handleRouteEnd = () => {
+      setLoading(false);
+    };
+
+    router.events.on('routeChangeStart', handleRouteStart);
+    router.events.on('routeChangeComplete', handleRouteEnd);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteStart);
+      router.events.off('routeChangeComplete', handleRouteEnd);
+    };
+  }, [router.events]);
+
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={mainTheme}>
         <CssBaseline />
         <Layout>
+          {loading && <Spinner />}
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
