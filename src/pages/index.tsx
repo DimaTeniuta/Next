@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ICharacter } from '@/interfaces/character';
 import * as Styled from '@/styles/index.styles';
+import { BLUR_IMAGE } from '@/constants/blurImage';
 
 export default function Home({ data }: { data: ICharacter }) {
   return (
@@ -12,9 +13,7 @@ export default function Home({ data }: { data: ICharacter }) {
           height={400}
           alt={'Image'}
           placeholder="blur"
-          blurDataURL={
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-          }
+          blurDataURL={BLUR_IMAGE}
         />
       </Styled.WrapperImage>
     </Styled.Container>

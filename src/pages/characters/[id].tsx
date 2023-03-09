@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import { ICharacter } from '@/interfaces/character';
+import { BLUR_IMAGE } from '@/constants/blurImage';
 import * as Styled from '../../styles/characters.id.styles';
 
 const Character = ({ data }: { data: ICharacter }) => {
@@ -21,9 +22,7 @@ const Character = ({ data }: { data: ICharacter }) => {
           height={400}
           alt={'Image'}
           placeholder="blur"
-          blurDataURL={
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-          }
+          blurDataURL={BLUR_IMAGE}
         />
         <Typography>{data.name}</Typography>
       </Styled.WrapperImage>

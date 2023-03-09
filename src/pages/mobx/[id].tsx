@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { observer } from 'mobx-react-lite';
 import Typography from '@mui/material/Typography';
 import characterStore from '@/store/character';
+import { BLUR_IMAGE } from '@/constants/blurImage';
 import * as Styled from '../../styles/mobx.id.styles';
 
 const MobxId = observer(() => {
@@ -22,9 +23,7 @@ const MobxId = observer(() => {
           height={400}
           alt={'Image'}
           placeholder="blur"
-          blurDataURL={
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-          }
+          blurDataURL={BLUR_IMAGE}
         />
         <Typography>{characterStore.character.name}</Typography>
       </Styled.WrapperImage>

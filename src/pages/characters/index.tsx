@@ -1,12 +1,11 @@
 import { Box, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Paper from '@mui/material/Paper';
 import { Search } from '@mui/icons-material';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
+import { BLUR_IMAGE } from '@/constants/blurImage';
 import * as Styled from '../../styles/characters.styles';
 
 const Characters = ({ data }: { data: ICharactersResult }) => {
@@ -42,6 +41,10 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
     setSearchValue(event?.target.value);
   };
 
+  const handleClick = (id: number) => {
+    return () => router.push(`/characters/${id}`);
+  };
+
   return (
     <Styled.Container>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>SSR</Box>
@@ -60,10 +63,10 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
         {data.results
           .filter((character) => character.name.toLowerCase().includes(searchValue.toLowerCase()))
           .map((character) => (
-            <Paper
+            <Styled.WrapperImage
               elevation={3}
               key={character.id}
-              sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 3 }}
+              onClick={handleClick(character.id)}
             >
               <Image
                 src={character.image}
@@ -71,15 +74,11 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
                 height={200}
                 alt={'Image'}
                 placeholder="blur"
-                blurDataURL={
-                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-                }
+                blurDataURL={BLUR_IMAGE}
               />
 
-              <Typography component={Link} href={`/characters/${character.id}`}>
-                {character.name}
-              </Typography>
-            </Paper>
+              <Typography>{character.name}</Typography>
+            </Styled.WrapperImage>
           ))}
       </Styled.Wrapper>
 

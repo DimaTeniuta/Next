@@ -8,6 +8,7 @@ import { ICharacter, ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import characterStore from '@/store/character';
 import pageStore from '@/store/page';
+import { BLUR_IMAGE } from '@/constants/blurImage';
 import * as Styled from '../../styles/mobx.styles';
 
 const Mobx = observer(({ data }: { data: ICharactersResult }) => {
@@ -85,9 +86,7 @@ const Mobx = observer(({ data }: { data: ICharactersResult }) => {
                 height={200}
                 alt={'Image'}
                 placeholder="blur"
-                blurDataURL={
-                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mN0cAipZyACMI4qpK9CAI/7DUlmLGLbAAAAAElFTkSuQmCC'
-                }
+                blurDataURL={BLUR_IMAGE}
               />
 
               <Typography onClick={handleClick(character)} sx={{ ':hover': { cursor: 'pointer' } }}>
