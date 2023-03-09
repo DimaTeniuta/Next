@@ -8,7 +8,7 @@ import { ICharacter, ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import characterStore from '@/store/character';
 import pageStore from '@/store/page';
-import * as Styled from './mobx.styles';
+import * as Styled from '../../styles/mobx.styles';
 
 const Mobx = observer(({ data }: { data: ICharactersResult }) => {
   const router = useRouter();

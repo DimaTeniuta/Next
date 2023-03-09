@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import { Search } from '@mui/icons-material';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
-import * as Styled from './characters.styles';
+import * as Styled from '../../styles/characters.styles';
 
 const Characters = ({ data }: { data: ICharactersResult }) => {
   const router = useRouter();

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { observer } from 'mobx-react-lite';
 import Typography from '@mui/material/Typography';
 import characterStore from '@/store/character';
-import * as Styled from './mobx.id.styles';
+import * as Styled from '../../styles/mobx.id.styles';
 
 const MobxId = observer(() => {
   const router = useRouter();
