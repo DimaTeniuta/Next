@@ -23,18 +23,26 @@ const Mobx = observer(({ data }: { data: ICharactersResult }) => {
 
   const goToPrevPage = () => {
     pageStore.decreasePage();
-    router.push({
-      pathname: router.pathname,
-      query: { page: pageStore.page },
-    });
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { page: pageStore.page },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   const goToNextPage = () => {
     pageStore.increasePage();
-    router.push({
-      pathname: router.pathname,
-      query: { page: pageStore.page },
-    });
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { page: pageStore.page },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   const handleClick = (character: ICharacter) => {
