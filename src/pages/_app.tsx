@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import { Spinner } from '@/components/Spinner';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import mainTheme from '../config/mainTheme';
 import createEmotionCache from '../config/createEmotionCache';
 
@@ -44,10 +45,12 @@ export default function App({
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={mainTheme}>
         <CssBaseline />
-        <Layout>
-          {loading && <Spinner />}
-          <Component {...pageProps} />
-        </Layout>
+        <ErrorBoundary>
+          <Layout>
+            {loading && <Spinner />}
+            <Component {...pageProps} />
+          </Layout>
+        </ErrorBoundary>
       </ThemeProvider>
     </CacheProvider>
   );

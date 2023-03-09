@@ -21,7 +21,7 @@ export default function Home({ data }: { data: ICharacter }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/66`);
   const data = await res.json();
   return {
