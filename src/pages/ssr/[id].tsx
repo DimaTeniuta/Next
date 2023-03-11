@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import { ICharacter } from '@/interfaces/character';
 import { BLUR_IMAGE } from '@/constants/blurImage';
-import * as Styled from '../../styles/characters.id.styles';
+import * as Styled from '../../styles/ssr.id.styles';
 
 const Character = ({ data }: { data: ICharacter }) => {
   const router = useRouter();

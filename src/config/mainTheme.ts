@@ -56,32 +56,6 @@ const mainTheme = createTheme({
         },
       },
     },
-    MuiDialog: {
-      styleOverrides: {
-        root: {
-          minWidth: 250,
-          minHeight: 200,
-        },
-      },
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          margin: 0,
-          padding: 18,
-        },
-      },
-    },
-    MuiDialogContent: {
-      styleOverrides: {
-        root: {
-          minWidth: 200,
-          minHeight: 200,
-          padding: 18,
-          overflowX: 'hidden',
-        },
-      },
-    },
     MuiOutlinedInput: {
       styleOverrides: {
         input: {

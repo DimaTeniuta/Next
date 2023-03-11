@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { Paper, styled } from '@mui/material';
 
 export const Container = styled('div')(() => ({
   display: 'flex',
@@ -15,4 +15,12 @@ export const Wrapper = styled('div')(() => ({
   flexWrap: 'wrap',
   gap: '20px',
   padding: '20px',
+}));
+
+export const WrapperImage = styled(Paper)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  rowGap: 30,
+  ':hover': { cursor: 'pointer' },
 }));

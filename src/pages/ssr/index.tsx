@@ -6,7 +6,7 @@ import { Search } from '@mui/icons-material';
 import { ICharactersResult } from '@/interfaces/character';
 import Pagination from '@/components/Pagination';
 import { BLUR_IMAGE } from '@/constants/blurImage';
-import * as Styled from '../../styles/characters.styles';
+import * as Styled from '../../styles/ssr.styles';
 
 const Characters = ({ data }: { data: ICharactersResult }) => {
   const router = useRouter();
@@ -42,7 +42,7 @@ const Characters = ({ data }: { data: ICharactersResult }) => {
   };
 
   const handleClick = (id: number) => {
-    return () => router.push(`/characters/${id}`);
+    return () => router.push(`/ssr/${id}`);
   };
 
   return (

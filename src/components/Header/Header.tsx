@@ -10,13 +10,13 @@ const Header = () => {
           <Styled.Toolbar>
             <Styled.WrapperBtn>
               <Button component={Link} href="/" sx={Styled.navButtonStyles}>
-                Main
+                Rick and Morty
               </Button>
-              <Button component={Link} href="/characters" sx={Styled.navButtonStyles}>
-                Characters
+              <Button component={Link} href="/ssr" sx={Styled.navButtonStyles}>
+                SSR
               </Button>
-              <Button component={Link} href="/mobx" sx={Styled.navButtonStyles}>
-                MobX
+              <Button component={Link} href="/csr" sx={Styled.navButtonStyles}>
+                CSR
               </Button>
             </Styled.WrapperBtn>
           </Styled.Toolbar>

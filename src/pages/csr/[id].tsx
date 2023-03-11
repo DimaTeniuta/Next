@@ -5,9 +5,9 @@ import { observer } from 'mobx-react-lite';
 import Typography from '@mui/material/Typography';
 import characterStore from '@/store/character';
 import { BLUR_IMAGE } from '@/constants/blurImage';
-import * as Styled from '../../styles/mobx.id.styles';
+import * as Styled from '../../styles/csr.id.styles';
 
-const MobxId = observer(() => {
+const CsrId = observer(() => {
   const router = useRouter();
 
   const handleGoBack = () => {
@@ -35,4 +35,4 @@ const MobxId = observer(() => {
   );
 });
 
-export default MobxId;
+export default CsrId;
